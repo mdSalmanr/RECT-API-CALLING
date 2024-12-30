@@ -8,8 +8,8 @@ const MoviesList = (props) => {
             return(
             <Movie
             title={movie.title}
-            releaseDate={movie.releaseDate}
-            opiningText={movie.opiningText}
+            year ={movie.year}
+            poster={movie.poster}
             />
             )
         })}

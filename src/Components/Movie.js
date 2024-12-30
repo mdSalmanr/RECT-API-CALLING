@@ -2,12 +2,12 @@ import React from "react";
 
 
 
-const Movie = ({title,releaseDate,openingText}) => {
+const Movie = ({title,year,poster}) => {
   return (
     <li>
         <h2>{title}</h2>
-        <h3>{releaseDate}</h3>
-        <p>{openingText}</p>
+        <img src={poster}  />
+        <p> {year}  </p>
     </li>
   )
 }
