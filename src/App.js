@@ -3,13 +3,36 @@ import './App.css';
 import { Fragment } from 'react';
 import { useState } from 'react';
 import MoviesList from './Components/MoviesList';
+import AddMovies from './Components/AddMovies';
 
 
 function App() {
   const[movies,setMovies] = useState([]);
   const[loading,setLoading] = useState(false);
   const[error,setError] = useState(null);
-   useEffect(()=>{
+  function Fetch(){
+    setLoading(true)
+    //setLoading(false);  
+    fetch('https://www.omdbapi.com/?apikey=21a79ebe&s=titanic').then((res)=>{
+      return res.json();
+    }).then((data)=>{
+      const update = data.Search.map(item =>{
+        return{
+          id:item.imdbID,
+          title:item.Title,
+          poster:item.Poster,
+          year:item.Year,
+        }
+
+      })
+      setMovies(update);
+      
+      
+
+    })
+}
+
+   /*useEffect(()=>{
     try{
       setLoading(true);
     fetch('https://www.omdbapi.com/?apikey=21a79ebe&s=titanic').then((res)=>{
@@ -31,7 +54,7 @@ function App() {
   }catch(error){
 
   }
-   },[])
+   },[])*/
     
  
     
@@ -55,9 +78,21 @@ function App() {
       setLoading(true);
     })
   }*/
+  const DataAddHandler = (data)=>{
+    setMovies((prev)=>{
+      return[data,...prev]
+    })
+  }
   
   return (
     <Fragment>
+      <section>
+        <AddMovies  onShave={DataAddHandler} />
+      </section>
+
+      <section>
+        <button onClick={Fetch}  >Fetch movies</button>
+      </section>
       
       <section>
         
